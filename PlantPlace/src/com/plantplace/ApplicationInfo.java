@@ -2,9 +2,9 @@ package com.plantplace;
 
 
 
-import javax.faces.bean.ManagedBean;
-import javax.inject.Named;
 
+import javax.inject.Named;
+import javax.faces.bean.ManagedBean;
 import org.springframework.context.annotation.Scope;
 
 @Named

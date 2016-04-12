@@ -33,10 +33,10 @@
 		<param-value>resources.application</param-value>
 	</context-param>
 	<listener>
-		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<listener>
-		<listener-class>org.springframework.web.context.request.RequestContextListner</listener-class>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 	<listener>
 		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
