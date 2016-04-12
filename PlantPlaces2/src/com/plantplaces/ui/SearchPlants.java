@@ -10,6 +10,7 @@ import javax.inject.Named;
 import org.springframework.context.annotation.Scope;
 
 import com.plantplaces.dto.Plant;
+import com.plantplaces.service.IPlantService;
 
 @Named
 @ManagedBean
@@ -19,6 +20,9 @@ public class SearchPlants {
 	@Inject
 	private Plant plant;
 
+	@Inject
+	private IPlantService plantService;
+	
 	public String execute() {
 		if (plant != null && plant.getName().equalsIgnoreCase("Redbud")) {
 			return "search";
@@ -54,6 +58,14 @@ public class SearchPlants {
 
 		return allPlants;
 
+	}
+
+	public IPlantService getPlantService() {
+		return plantService;
+	}
+
+	public void setPlantService(IPlantService plantService) {
+		this.plantService = plantService;
 	}
 
 }
