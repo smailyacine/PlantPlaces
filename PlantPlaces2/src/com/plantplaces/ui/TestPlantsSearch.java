@@ -41,7 +41,7 @@ public class TestPlantsSearch  extends TestCase{
 		
 		searchPlants = new SearchPlants();
 		Plant plant=new Plant();
-		plant.setName("Pawpaw");
+		plant.setCommon("Pawpaw");
 		searchPlants.setPlant(plant);
 	}
 
@@ -59,7 +59,7 @@ public class TestPlantsSearch  extends TestCase{
 	private void givenSearchPlantsCreatedWithRedbud() {
 		searchPlants = new SearchPlants();
 		Plant plant=new Plant();
-		plant.setName("Redbud");
+		plant.setCommon("Redbud");
 		searchPlants.setPlant(plant);
 		
 	}

@@ -1,8 +1,6 @@
 package com.plantplaces.dto;
 
 
-
-
 import javax.faces.bean.ManagedBean;
 import javax.inject.Named;
 
@@ -15,11 +13,11 @@ import org.springframework.context.annotation.Scope;
 public class Plant {
 
 	
-	private String name;
 	private String genus;
 	private String species;
 	private String cultivar;
 	private String common;
+	private int guid;
 	
 	public String getGenus() {
 		return genus;
@@ -53,18 +51,19 @@ public class Plant {
 		this.common = common;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	@Override//we overide the tostring method of the Object class to 
 	//get a more readable output 
 	public String toString() {
-		return  name;
+		return  common;
+	}
+
+	public int getGuid() {
+		return guid;
+	}
+
+	public void setGuid(int guid) {
+		this.guid = guid;
 	}
 	
 	

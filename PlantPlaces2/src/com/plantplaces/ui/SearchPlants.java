@@ -24,7 +24,7 @@ public class SearchPlants {
 	private IPlantService plantService;
 	
 	public String execute() {
-		if (plant != null && plant.getName().equalsIgnoreCase("Redbud")) {
+		if (plant != null && plant.getCommon().equalsIgnoreCase("Redbud")) {
 			return "search";
 		} else {
 			return "noresults";
@@ -45,15 +45,15 @@ public class SearchPlants {
 
 		// create plants and add theml to the collection
 		Plant redbud = new Plant();
-		redbud.setName("Eastern Redbud");
+		redbud.setCommon("Eastern Redbud");
 		allPlants.add(redbud);
 
 		Plant pawapaw = new Plant();
-		pawapaw.setName("Paw Paw");
+		pawapaw.setCommon("Paw Paw");
 		allPlants.add(pawapaw);
 
 		Plant nasturtium = new Plant();
-		nasturtium.setName("nasturtiom");
+		nasturtium.setCommon("nasturtiom");
 		allPlants.add(nasturtium);
 
 		return allPlants;

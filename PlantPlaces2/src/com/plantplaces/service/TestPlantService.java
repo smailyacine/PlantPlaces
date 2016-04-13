@@ -52,7 +52,6 @@ public class TestPlantService extends TestCase{
 		
 		//create plants and addthem to the collection
 		Plant redbud=new Plant();
-		redbud.setName("Eastern Redbud");
 		redbud.setCommon("redbud");
 		redbud.setGenus("Cercis");
 		redbud.setSpecies("canadensis");

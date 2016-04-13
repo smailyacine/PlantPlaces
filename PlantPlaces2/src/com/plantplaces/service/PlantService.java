@@ -12,8 +12,9 @@ public class PlantService implements IPlantService{
 
 
 @Inject
-IPlantDAO plantDAO;
+private IPlantDAO plantDAO;
 private List<Plant> allPlants;
+
 public IPlantDAO getPlantDAO() {
 	return plantDAO;
 }
@@ -39,9 +40,7 @@ public List<Plant> filterPlants(String filter) {
 	}
 
 public void save(Plant plant) throws Exception{
-	if(plant.getGenus()==null||plant.getGenus().isEmpty()){
-		throw new Exception("Genus required");
-	}
+	
 	plantDAO.insert(plant);
 }
 }
