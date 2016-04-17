@@ -62,4 +62,10 @@ public class PlantDAOStub implements IPlantDAO{
 		
 	}
 
+	@Override
+	public List<Plant> fetchPlants(Plant plant) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

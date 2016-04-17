@@ -1,8 +1,13 @@
 package com.plantplaces.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
+import com.plantplaces.dto.Photo;
 import com.plantplaces.dto.Plant;
+import com.plantplaces.dto.Specimen;
 
 /**
  * IPlant Service ncludes all business related functions for a plant and related entities
@@ -24,5 +29,24 @@ public interface IPlantService {
 	 * @throws Exception if unable to save
 	 */
 	void save(Plant plant) throws Exception;
+
+	/**
+	 * return a list of plants that match the given criteria
+	 * @param plant a parameter that contains the search criteria 
+	 * @return a list of matching plants
+	 */
+	List<Plant> fetchPlants(Plant plant);
+
+	void save(Specimen specimen) throws Exception;
+
+	/**
+	 * load speecimens for a givenn plant
+	 * @param plant is the plant in question
+	 */
+	public void loadSpecimens(Plant plant);
+
+	void savePhoto(Photo photo, InputStream inputstream) throws IOException;
+
+	
 	
 }

@@ -7,7 +7,18 @@
 
     <application>
         <el-resolver>
-            org.springframework.web.jsf.el.SpringBeanFacesELResolver
+        	org.springframework.web.jsf.el.SpringBeanFacesELResolver
         </el-resolver>
     </application> 
+    <navigation-rule>
+    	<from-view-id>results</from-view-id>
+    	<navigation-case>
+    		<from-outcome>results</from-outcome>
+    		<to-view-id>results.xhtml</to-view-id>
+    	</navigation-case>
+    	<navigation-case>    	
+    		<from-outcome>noresults</from-outcome>
+    		<to-view-id>noresults</to-view-id>
+    		</navigation-case>
+    </navigation-rule>
 </faces-config>

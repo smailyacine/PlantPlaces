@@ -2,6 +2,7 @@ package com.plantplaces.ui;
 
 
 
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -23,8 +24,10 @@ public class AddPlant {
 
 	@Inject
 	private Plant plant;
+
 	@Inject
-	IPlantService plantService;
+	private IPlantService plantService;
+	
 	private String message = "foo";
 
 	public String execute() {
@@ -40,7 +43,7 @@ public class AddPlant {
 			FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "saved", "Plant saved");
 			currentInstance.addMessage(null, fm);
 		} catch (Exception e) {
-			logger.error("error while savin gplant. Message" + e.getMessage());
+			logger.error("error while saving plant. Message" + e.getMessage());
 
 			e.printStackTrace();
 			returnValue = "fail";

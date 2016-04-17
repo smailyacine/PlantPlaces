@@ -1,23 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"  
-    xmlns:h="http://java.sun.com/jsf/html"  
-    xmlns:f="http://java.sun.com/jsf/core"  
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:ui="http://java.sun.com/jsf/facelets"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head> 
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />  
-	<title>Plant places.com</title> 
-</h:head> 
-<h:body> 
-	<h1>welcome to plant places.com</h1> 
-	<em><h:outputLabel value="#{applicationInfo.slogan}" /></em> 
-	<h2>plant results for:<p:outputLabel value="#{plant.common}"/></h2> 
-	<h:form> 
-		<h:inputText value="#{plant.common}"/> 
-		<h:commandButton value="Submit" action="#{searchPlants.execute}"/> 
-	</h:form> 
-	<h:link value="Contactus" outcome="contactUs"/>  
-</h:body> 
-</html>                                                                                                                 
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Plant places.com</title>
+</h:head>
+<h:body>
+	<h1>welcome to plant places.com</h1>
+	<em><h:outputLabel value="#{applicationInfo.slogan}" /></em>
+	<h2>
+		plant results for:
+		<p:outputLabel value="#{plant.common}" />
+	</h2>
+	<p:dataTable id="showPlants" var="plantResult" value="#{searchPlants.plants}"
+		selectionMode="single" rowKey="#{plantResult.guid}">
+		<p:ajax event="rowSelect" listener="#{searchPlants.onRowSelect}" />
+		<p:column headerText="Id">
+			<h:outputText value="#{plantResult.guid}" />
+		</p:column>
+		<p:column headerText="genus">
+			<h:outputText value="#{plantResult.genus}" />
+		</p:column>
+		<p:column headerText="species">
+			<h:outputText value="#{plantResult.species}" />
+		</p:column>
+		<p:column headerText="cultivar">
+			<h:outputText value="#{plantResult.cultivar}" />
+		</p:column>
+		<p:column headerText="common name">
+			<h:outputText value="#{plantResult.common}" />
+		</p:column>
+		<f:facet name="footer">
+			<p:commandButton process="showPlants" value="view" action="#{searchPlants.showDetails}"/>
+		</f:facet>
+	</p:dataTable>
+	<h:form>
+		<h:inputText value="#{plant.common}" />
+		<h:commandButton value="Submit" action="#{searchPlants.execute}" />
+	</h:form>
+	<h:link value="Contactus" outcome="contactUs" />
+</h:body>
+</html>

@@ -38,3 +38,16 @@
 .printonly{
 	display: none;
 }
+
+.inputData{
+	background-color:#d6bd91;
+	}
+
+.inputData input{
+	margin-left: 6em;
+	background-color: #dffdf1;
+}
+.inputData label {
+	position: absolute;
+}
+

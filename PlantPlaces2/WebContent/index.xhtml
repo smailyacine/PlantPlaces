@@ -19,7 +19,7 @@
 	<h:form>
 				<!--  <p:inputText value="#{plant.name}" /> -->
 				<p:autoComplete value="#{plant.common}" completeMethod="#{searchPlants.completePlants}"></p:autoComplete>
-				<p:commandButton value="Submit"  actionListener="#{searchPlants.execute}" ajax="false"/>
+				<p:commandButton value="Submit" action="#{searchPlants.execute}" actionListener="#{searchPlants.execute}" ajax="false"/>
 			</h:form>
 			<h:link value="Contactus" outcome="contactUs" />
 
