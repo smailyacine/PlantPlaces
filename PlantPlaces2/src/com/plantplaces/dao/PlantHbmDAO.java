@@ -2,12 +2,13 @@ package com.plantplaces.dao;
 
 import java.util.Collections;
 import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
-import com.plantplaces.dao.HibernateUtil;
+
 import com.plantplaces.dto.Plant;
 
-public class PlantHbmDAO implements IPlantDAO {
+public class PlantHbmDAO extends PlantPlacesHbmDAO<Plant> implements IPlantDAO {
 	public List<Plant> fetchPlants() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Query query = session.createQuery("from Plant");
@@ -30,11 +31,8 @@ public class PlantHbmDAO implements IPlantDAO {
 	}
 
 	@Override
-	public void insert(Plant plant) throws Exception {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		session.beginTransaction();
+	public void insert(Session session,Plant plant) throws Exception{
 		session.save(plant);
-		session.getTransaction().commit();
 	}
 
 	@Override
@@ -46,4 +44,6 @@ public class PlantHbmDAO implements IPlantDAO {
 	public void delete(Plant plant) throws Exception {
 		// TODO Auto-generated method stub
 	}
+
+
 }

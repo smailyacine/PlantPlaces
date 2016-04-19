@@ -5,7 +5,9 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-
+<h:head>
+	<title>specimen</title>
+</h:head>
 
 <h:body>
 	<ui:composition template="template.xhtml">
@@ -42,6 +44,7 @@
 			<h:form>
 				<p:growl id="growl" showDetail="true" sticky="true" />
 				<div class="inputData">
+					<!-- class="inputData" -->
 					<br></br>
 					<h:outputLabel value="latitude" />
 					<p:inputText value="#{specimenVO.specimen.latitude}" />
@@ -59,21 +62,22 @@
 				<p:commandButton value="Submit" actionListener="#{specimenVO.save}"
 					update="growl" />
 			</h:form>
-			<img src="images/image.jpg" height="100" width="140" />
+			<img src="resources/images/image.jpg" height="100" width="140" />
+			<div class="inputData">
 			<p:fieldset legend="add a photo to the specimen">
-			<p:outputLabel value="Date Taken"/><p:calendar id="dtaeTaken" value="#{specimenVO.photo.dateTaken}"/>
-			<p:outputLabel value="contibutor"/><p:inputText value="#{specimenVO.photo.contributor}"></p:inputText>
+				<p:outputLabel value="Date Taken" />
+				<p:calendar id="dtaeTaken" value="#{specimenVO.photo.dateTaken}" />
+				<br />
+				<p:outputLabel value="contibutor" />
+				<p:inputText value="#{specimenVO.photo.contributor}"></p:inputText>
 				<h:head></h:head>
-				<h:form enctype="multipart/form-data">
-					<p:growl id="messages" showDetail="true" />
-
-					<p:fileUpload value="#{specimenVO.file}" mode="simple"
-						skinSimple="true" />
-
-					<p:commandButton value="Submit" ajax="false"
-						actionListener="#{specimenVO.upload}" />
-				</h:form>
+				
+				<h:form enctype="multipart/form-data" style="width:500px">
+					<p:fileUpload value="#{specimenVO.file}" mode="advanced"
+						fileUploadListener="#{specimenVO.fileUploadListener}"></p:fileUpload>
+				</h:form>				
 			</p:fieldset>
+			</div>
 			<h4>Specimen Management</h4>
 			<h:link value="Contactus" outcome="contactUs" />
 		</ui:define>

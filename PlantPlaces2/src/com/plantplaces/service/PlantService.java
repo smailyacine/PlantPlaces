@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.plantplaces.dao.IFileDAO;
+import com.plantplaces.dao.IPhotoDAO;
 import com.plantplaces.dao.IPlantDAO;
 import com.plantplaces.dao.ISpecimenDAO;
 import com.plantplaces.dto.Photo;
@@ -27,7 +28,10 @@ public class PlantService implements IPlantService {
 	IPlantDAO plantDAO;
 	private List<Plant> allPlants;
 	@Inject
-	private ISpecimenDAO specimenDAO;
+	private ISpecimenDAO specimenDAO;	
+	@Inject
+	private IPhotoDAO photoDAO;
+	
 	public IPlantDAO getPlantDAO() {
 		return plantDAO;
 	}
@@ -60,7 +64,7 @@ public class PlantService implements IPlantService {
 		if(plant.getGenus()==null||plant.getGenus().isEmpty()){
 			throw new Exception("benus required");
 		}
-		plantDAO.insert(plant);
+		plantDAO.save(plant);
 	}
 
 	public List<Plant> fetchPlants(Plant plant) {	
@@ -69,7 +73,7 @@ public class PlantService implements IPlantService {
 	}
 	@Override
 	public void save(Specimen specimen) throws Exception{
-		specimenDAO.insert(specimen);
+		specimenDAO.save(specimen);
 	}
 
 	public ISpecimenDAO getSpecimenDAO() {
@@ -88,7 +92,7 @@ public class PlantService implements IPlantService {
 	}
 
 	@Override
-	public void savePhoto(Photo photo, InputStream inputstream) throws IOException {
+	public void save(Photo photo, InputStream inputstream) throws Exception {
 		// TODO Auto-generated method stub
 		File directory=new File("C:/git/PlantPlaces2/WebContent/images");
 		String uniqueImageName=getUniqueImageName();
@@ -96,6 +100,7 @@ public class PlantService implements IPlantService {
 		fileDAO.save(inputstream, file);
 		photo.setUri(uniqueImageName);
 		//save the photo into the database
+		photoDAO.save(photo);
 	}
 
 	private String getUniqueImageName() {
@@ -114,5 +119,19 @@ public class PlantService implements IPlantService {
 
 	public void setFileDAO(IFileDAO fileDAO) {
 		this.fileDAO = fileDAO;
+	}
+
+	public IPhotoDAO getPhotoDAO() {
+		return photoDAO;
+	}
+
+	public void setPhotoDAO(IPhotoDAO photoDAO) {
+		this.photoDAO = photoDAO;
+	}
+	@Override
+	public List<Photo> fetchPhotos(Specimen specimen){
+		
+		return photoDAO.fetchPhotos(specimen);
+		
 	}
 }

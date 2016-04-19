@@ -2,9 +2,11 @@ package com.plantplaces.ui;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -22,8 +24,10 @@ import com.plantplaces.service.IPlantService;
 @Named
 @ManagedBean // available in each html page
 @Scope
+@SessionScoped
 public class SpecimenVO {
 
+	FileUploadEvent event;
 	private Plant plant;
 	@Inject
 	private Specimen specimen;
@@ -32,15 +36,18 @@ public class SpecimenVO {
 	private UploadedFile file;
 	@Inject
 	private Photo photo;
+	private List<Photo> photos;
+	
 	public UploadedFile getFile() {
+//		System.out.println("get file viens d'etre appelé");
 		return file;
 	}
 
 	public void setFile(UploadedFile file) {
 		this.file = file;
 	}
-
-	public void upload(FileUploadEvent event){
+	public String upload() throws Exception{
+	
 		if(specimen.getId()==0) {
 			FacesMessage message = new FacesMessage("you have not selected a specimen");
 			FacesContext.getCurrentInstance().addMessage(null, message);
@@ -51,20 +58,26 @@ public class SpecimenVO {
 				InputStream inputstream = file.getInputstream();
 				photo.setSpecimenId(specimen.getId());
 				//pass the photo data and the photo metadata to our busniess logic layer
-				plantService.savePhoto(getPhoto(),inputstream);
+				plantService.save(getPhoto(),inputstream);
 				FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
 				FacesContext.getCurrentInstance().addMessage(null, message);
-			} catch (IOException e) {
+			} catch (IOException ex) {
 				FacesMessage message = new FacesMessage("there was a problem, your file was not upload");
 				FacesContext.getCurrentInstance().addMessage(null, message);
-				e.printStackTrace();
+				ex.printStackTrace();
 			}
 		
 		}else {
 		 System.out.println("file null");	
 		}
+		return "";
 	}
-	
+    public void fileUploadListener(FileUploadEvent e){
+        // Get uploaded file from the FileUploadEvent
+        this.file = e.getFile();
+        // Print out the information of the file
+        System.out.println("Uploaded File Name Is :: "+file.getFileName()+" :: Uploaded File Size :: "+file.getSize());
+    }
 	public Plant getPlant() {
 		return plant;
 	}
@@ -105,7 +118,13 @@ public class SpecimenVO {
 		Specimen specimen = ((Specimen) event.getObject());
 		// push selected plant into epeciemenVO
 		setSpecimen(specimen);
-
+		//find the matching photos for that specimen
+//		photos=plantService.fetchPhotos(specimen);
+		try{
+			FacesContext.getCurrentInstance().getExternalContext().redirect("specimen.xhtml");
+			}catch(IOException ex){
+				ex.printStackTrace();
+			}
 	}
 
 	public Photo getPhoto() {
@@ -116,4 +135,11 @@ public class SpecimenVO {
 		this.photo = photo;
 	}
 
+	public List<Photo> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
+	}
 }
